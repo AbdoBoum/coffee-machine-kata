@@ -14,7 +14,8 @@ public class MessageMaker implements IMessageMaker{
         String sugarSentence = drink.getSugarQuantity() > 0 ? String.valueOf(drink.getSugarQuantity()) : "no";
         sugarSentence += drink.getSugarQuantity() > 1 ? " sugars" : " sugar";
         String stickSentence = drink.getSugarQuantity() > 0 ? "a stick" : "therefore no stick";
-        return String.format("Drink maker makes 1 %s with %s and %s", drink.getDrinkFullName(), sugarSentence, stickSentence);
+        String extraHotSentence = drink.isExtraHot() ? "an extra hot" : "1";
+        return String.format("Drink maker makes %s %s with %s and %s",extraHotSentence, drink.getDrinkFullName(), sugarSentence, stickSentence);
     }
 
     @Override

@@ -22,7 +22,7 @@ public class Order {
     @Override
     public String toString() {
         StringJoiner order = new StringJoiner(":");
-        order.add(drink.getDrinkShortName())
+        order.add(drink.getNameWithTemperature())
                 .add(isStickNeeded() ? Integer.toString(getSugarQuantity()) : "")
                 .add(isStickNeeded() ? "0" : "");
         return order.toString();

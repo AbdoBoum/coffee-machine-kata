@@ -1,11 +1,7 @@
 package service;
 
 
-import model.drink.Chocolate;
-import model.drink.Coffee;
-import model.drink.Drink;
-import model.drink.Tea;
-import org.junit.jupiter.api.BeforeEach;
+import model.drink.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -67,12 +63,16 @@ public class OrderMakerTest {
     }
 
     private static Stream<Arguments> paidOrders() {
+        Tea tea = new Tea(); tea.setExtraHot();
+        OrangeJuice orangeJuice = new OrangeJuice(); orangeJuice.setExtraHot();
         return Stream.of(
                 Arguments.of(new Tea(1), 0.4d, "T:1:0"),
                 Arguments.of(new Chocolate(), 0.7d, "H::"),
                 Arguments.of(new Coffee(2), 0.1d, "0,5 euro is missing to order 1 coffee"),
                 Arguments.of(new Tea(), 0.5d, "T::"),
-                Arguments.of(new Chocolate(), 0.2d, "0,3 euro is missing to order 1 chocolate")
+                Arguments.of(new Chocolate(), 0.2d, "0,3 euro is missing to order 1 chocolate"),
+                Arguments.of(orangeJuice, 0.6d, "O::"),
+                Arguments.of(tea, 0.7d, "Th::")
         );
     }
 
