@@ -1,14 +1,22 @@
 package service;
 
+import lombok.NoArgsConstructor;
 import model.drink.Drink;
 import model.order.Order;
 
 /**
  * Order Maker is a component that build the messages that will be received by drink maker
  */
+@NoArgsConstructor
 public class OrderMaker implements IOrderMaker {
 
+    private IMessageMaker messageMaker;
     private CoffeeMachine coffeeMachine;
+
+    public OrderMaker(IMessageMaker messageMaker, CoffeeMachine coffeeMachine) {
+        this.messageMaker = messageMaker;
+        this.coffeeMachine = coffeeMachine;
+    }
 
     /**
      * @param drink: drink ordered by customer
@@ -20,16 +28,12 @@ public class OrderMaker implements IOrderMaker {
         return order.toString();
     }
 
-    /**
-     * @param drink: drink ordered by customer
-     * @return string message to be delivered to the customer
-     */
     @Override
-    public String createMessageForOrder(Drink drink) {
-        String sugarSentence = drink.getSugarQuantity() > 0 ? String.valueOf(drink.getSugarQuantity()) : "no";
-        sugarSentence += drink.getSugarQuantity() > 1 ? " sugars" : " sugar";
-        String stickSentence = drink.getSugarQuantity() > 0 ? "a stick" : "therefore no stick";
-        return String.format("Drink maker makes 1 %s with %s and %s", drink.getDrinkFullName(), sugarSentence, stickSentence);
+    public String createPaidOrderFromDrink(Drink drink, double money) {
+        if (drink.isMoneyEnough(money)) {
+            return createOrderFromDrink(drink);
+        }
+        return messageMaker.createNotEnoughMoneyProvidedMessage(drink, money);
     }
 
     /**

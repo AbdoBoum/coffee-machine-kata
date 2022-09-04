@@ -1,13 +1,12 @@
 package model.drink;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
-public class Tea extends
-        Drink {
+public class Tea extends Drink {
+    public Tea() {
+        super(0, 0.4d);
+    }
 
     public Tea(int sugarQuantity) {
-        super(sugarQuantity);
+        super(sugarQuantity, 0.4d);
     }
 
     public String getDrinkShortName() {

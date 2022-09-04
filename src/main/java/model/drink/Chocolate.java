@@ -1,11 +1,13 @@
 package model.drink;
 
-import lombok.NoArgsConstructor;
-
-@NoArgsConstructor
 public class Chocolate extends Drink {
-    public Chocolate(int sugarQuantity){
-        super(sugarQuantity);
+
+    public Chocolate() {
+        super(0, 0.5d);
+    }
+
+    public Chocolate(int sugarQuantity) {
+        super(sugarQuantity, 0.5d);
     }
 
     @Override
